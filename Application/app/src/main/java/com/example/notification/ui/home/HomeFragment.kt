@@ -17,9 +17,7 @@ import com.example.notification.utils.NotificationManager.getNotificationManager
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) , View.OnClickListener {
 
     private lateinit var viewModel: HomeViewModel
-
-
-
+    
     companion object {
         const val CHANNEL_1_ID = "channel1"
         const val CHANNEL_2_ID = "channel2"
@@ -35,19 +33,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        binding.sendOnChannelOneId.setOnClickListener(this@HomeFragment)
-        binding.sendOnChannelTwoId.setOnClickListener(this@HomeFragment)
+        binding.simpleNotificationId.setOnClickListener(this@HomeFragment)
+        binding.simpleCategoryNotificationId.setOnClickListener(this@HomeFragment)
         createNotificationChannels()
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.sendOnChannelOneId -> {
+            R.id.simpleNotificationId -> {
                 val title = binding.editTextTitle.text.toString()
                 val message = binding.editTextMessage.text.toString()
                 sendOnChannel1(title,message)
             }
-            R.id.sendOnChannelTwoId -> {
+            R.id.simpleCategoryNotificationId -> {
                 val title = binding.editTextTitle.text.toString()
                 val message = binding.editTextMessage.text.toString()
                 sendOnChannel2(title,message)
@@ -95,7 +93,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Set up the channels
-                
+
             val channel1 = NotificationChannel(
                 CHANNEL_1_ID, CHANNEL_1_NAME,
                 NotificationManager.IMPORTANCE_HIGH

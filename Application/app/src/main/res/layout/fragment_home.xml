@@ -16,13 +16,13 @@
             android:importantForAutofill="no"
             android:hint="@string/enter_the_message" />
         <Button
-            android:id="@+id/sendOnChannelOneId"
+            android:id="@+id/simpleNotificationId"
             style="@style/launchBtnStyle"
-            android:text="@string/send_notification_to_channel_1" />
+            android:text="Simple Notification" />
         <Button
-            android:id="@+id/sendOnChannelTwoId"
+            android:id="@+id/simpleCategoryNotificationId"
             style="@style/launchBtnStyle"
-            android:text="@string/send_notification_to_channel_2" />
+            android:text="Notification in category" />
 
     </LinearLayout>
 
