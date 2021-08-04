@@ -36,6 +36,10 @@
                 android:id="@+id/simpleCategoryNotificationId"
                 style="@style/launchBtnStyle"
                 android:text="Notification in category" />
+            <Button
+                android:id="@+id/addingActionId"
+                style="@style/launchBtnStyle"
+                android:text="Adding action" />
 
         </LinearLayout>
 
