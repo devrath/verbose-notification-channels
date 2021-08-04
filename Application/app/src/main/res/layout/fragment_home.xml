@@ -14,13 +14,15 @@
             android:id="@+id/edit_text_title"
             style="@style/launchEditTextStyle"
             android:hint="@string/enter_the_title"
+            android:text="@string/enter_the_title"
             android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/edit_text_message"
             style="@style/launchEditTextStyle"
             android:importantForAutofill="no"
-            android:hint="@string/enter_the_message" />
+            android:hint="@string/enter_the_message"
+            android:text="@string/enter_the_message"/>
 
     </LinearLayout>
 

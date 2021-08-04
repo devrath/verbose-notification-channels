@@ -146,11 +146,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setColor(Color.BLUE)
+                // Add the content on click behavior
                 .setContentIntent(contentIntent)
-                .setAutoCancel(true)
+                // User cannot cancel the notification by swiping but can only by performing an action
+                .setAutoCancel(false)
                 // When notification is popped for the first time, it will make sound, next subsequent notifications will not make the sound in this channel
                 .setOnlyAlertOnce(true)
-                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+                // Add the action click behavior
+                .addAction(R.drawable.ic_action, "Toast", actionIntent)
                 .build()
 
             getNotificationManager(activity)?.apply { notify(Random.nextInt(), notification) }
