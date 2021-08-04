@@ -42,6 +42,14 @@
                 android:id="@+id/addingActionId"
                 style="@style/launchBtnStyle"
                 android:text="Adding action" />
+            <Button
+                android:id="@+id/bigMsgId"
+                style="@style/launchBtnStyle"
+                android:text="Big Message" />
+            <Button
+                android:id="@+id/imageInNotificationId"
+                style="@style/launchBtnStyle"
+                android:text="Image in notification" />
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.example.notification.ui.home
 
 import android.app.*
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -26,14 +27,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         const val CHANNEL_1_ID = "channel1"
         const val CHANNEL_2_ID = "channel2"
         const val CHANNEL_3_ID = "channel3"
+        const val CHANNEL_4_ID = "channel4"
+        const val CHANNEL_5_ID = "channel5"
 
         const val CHANNEL_1_NAME = "Channel 1"
         const val CHANNEL_2_NAME = "Channel 2"
         const val CHANNEL_3_NAME = "Channel 3"
+        const val CHANNEL_4_NAME = "Channel 4"
+        const val CHANNEL_5_NAME = "Channel 5"
 
         const val CHANNEL_1_DESCRIPTION = "This is Channel 1"
         const val CHANNEL_2_DESCRIPTION = "This is Channel 2"
         const val CHANNEL_3_DESCRIPTION = "This is Channel 3"
+        const val CHANNEL_4_DESCRIPTION = "This is Channel 4"
+        const val CHANNEL_5_DESCRIPTION = "This is Channel 5"
     }
 
 
@@ -43,6 +50,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.simpleNotificationId.setOnClickListener(this@HomeFragment)
         binding.simpleCategoryNotificationId.setOnClickListener(this@HomeFragment)
         binding.addingActionId.setOnClickListener(this@HomeFragment)
+        binding.bigMsgId.setOnClickListener(this@HomeFragment)
+        binding.imageInNotificationId.setOnClickListener(this@HomeFragment)
         createNotificationChannels()
     }
 
@@ -64,6 +73,79 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 val message = binding.editTextMessage.text.toString()
                 addingActionForNotification(title, message)
             }
+            R.id.bigMsgId -> {
+                val title = binding.editTextTitle.text.toString()
+                val message = binding.editTextMessage.text.toString()
+                bigMessageNotification(title, message)
+            }
+            R.id.imageInNotificationId -> {
+                val title = binding.editTextTitle.text.toString()
+                val message = binding.editTextMessage.text.toString()
+                imageInNotification(title, message)
+            }
+        }
+    }
+
+    /**
+     * Prepare the notification which has a large text
+     */
+    private fun bigMessageNotification(title: String, message: String) {
+        activity?.let {
+            val activityIntent = Intent(it, MainActivity::class.java)
+            val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
+
+            val notification: Notification = NotificationCompat.Builder(it, CHANNEL_4_ID)
+                .setSmallIcon(R.drawable.ic_pokemon)
+                .setContentTitle(title)
+                .setContentText(message)
+                // Set the type specifying the big text message
+                .setStyle(
+                    NotificationCompat.BigTextStyle()
+                        // Entire big text
+                        .bigText(getString(R.string.long_text_message))
+                        // Header title for the big text
+                        .setBigContentTitle("Large text title")
+                        // Summary title text in the collapsed state
+                        .setSummaryText("Large text summary")
+                )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .build()
+
+            // Notify the prepared notification to the manager
+            getNotificationManager(activity)?.apply { notify(Random.nextInt(), notification) }
+        }
+    }
+
+
+
+    /**
+     * Prepare the notification which has a Image
+     */
+    private fun imageInNotification(title: String, message: String) {
+        activity?.let {
+            val activityIntent = Intent(it, MainActivity::class.java)
+            val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
+
+            val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_profile)
+
+            val notification: Notification = NotificationCompat.Builder(it, CHANNEL_5_ID)
+                .setSmallIcon(R.drawable.ic_pokemon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setLargeIcon(largeIcon)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .build()
+
+            // Notify the prepared notification to the manager
+            getNotificationManager(activity)?.apply { notify(Random.nextInt(), notification) }
         }
     }
 
@@ -103,7 +185,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    fun addingActionForNotification(title: String, message: String) {
+    private fun addingActionForNotification(title: String, message: String) {
         activity?.let {
              /** NOTE: -> We can use the Pending intent to
              *  *** Start the activity
@@ -137,7 +219,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
              * *********** Intent: Used to launch the destination
              * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
              * */
-            val actionIntent = PendingIntent.getBroadcast(it, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val actionIntent = PendingIntent.getBroadcast(
+                it,
+                0,
+                broadcastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_3_ID)
                 .setSmallIcon(R.drawable.ic_pokemon)
@@ -193,11 +280,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 description = CHANNEL_3_DESCRIPTION
             }
 
+            val channel4 = NotificationChannel(
+                CHANNEL_4_ID, CHANNEL_4_NAME,
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                // Set properties that applies to all the notifications in this channel
+                description = CHANNEL_4_DESCRIPTION
+            }
+
+            val channel5 = NotificationChannel(
+                CHANNEL_5_ID, CHANNEL_5_NAME,
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                // Set properties that applies to all the notifications in this channel
+                description = CHANNEL_5_DESCRIPTION
+            }
+
             getNotificationManager(activity)?.apply {
                 // Use the notification manager to create the channel with attributes
                 channel1.apply { createNotificationChannel(this) }
                 channel2.apply { createNotificationChannel(this) }
                 channel3.apply { createNotificationChannel(this) }
+                channel4.apply { createNotificationChannel(this) }
+                channel5.apply { createNotificationChannel(this) }
             }
 
         }
