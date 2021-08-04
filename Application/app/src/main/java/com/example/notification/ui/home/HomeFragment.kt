@@ -12,6 +12,7 @@ import com.example.notification.R
 import com.example.notification.databinding.FragmentHomeBinding
 import com.example.notification.ui.base.BaseFragment
 import com.example.notification.utils.NotificationManager.getNotificationManager
+import kotlin.random.Random
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) , View.OnClickListener {
@@ -43,39 +44,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             R.id.simpleNotificationId -> {
                 val title = binding.editTextTitle.text.toString()
                 val message = binding.editTextMessage.text.toString()
-                sendOnChannel1(title,message)
+
+                simpleNotification(title,message)
             }
             R.id.simpleCategoryNotificationId -> {
                 val title = binding.editTextTitle.text.toString()
                 val message = binding.editTextMessage.text.toString()
-                sendOnChannel2(title,message)
+                notificationInCategory(title,message)
             }
-        }
-    }
-
-
-    /**
-     * Prepare the notification
-     */
-    private fun sendOnChannel1(title: String, message: String) {
-        activity?.let {
-            // Prepare each notification
-            val notification: Notification = NotificationCompat.Builder(it, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .build()
-            // Notify the prepared notification to the manager
-            getNotificationManager(activity)?.apply { notify(1, notification) }
         }
     }
 
     /**
      * Prepare the notification and notify using the notification manager
      */
-    private fun sendOnChannel2(title: String, message: String) {
+    private fun simpleNotification(title: String, message: String) {
         activity?.let {
             // Prepare each notification
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_2_ID)
@@ -85,11 +68,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build()
             // Notify the prepared notification to the manager
-            getNotificationManager(activity)?.apply { notify(2, notification) }
+            getNotificationManager(activity)?.apply { notify(Random.nextInt(), notification) }
         }
     }
 
 
+    /**
+     * Prepare the notification
+     */
+    private fun notificationInCategory(title: String, message: String) {
+        activity?.let {
+            // Prepare each notification
+            val notification: Notification = NotificationCompat.Builder(it, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_EMAIL)
+                .build()
+            // Notify the prepared notification to the manager
+            getNotificationManager(activity)?.apply { notify(Random.nextInt(), notification) }
+        }
+    }
+
+
+    /**
+     * Create the notification channels
+     */
     private fun createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Set up the channels
@@ -118,7 +123,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
-
+    
 
 }
