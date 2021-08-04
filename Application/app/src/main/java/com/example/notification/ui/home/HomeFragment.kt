@@ -17,7 +17,7 @@ import com.example.notification.utils.NotificationManager.getNotificationManager
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) , View.OnClickListener {
 
     private lateinit var viewModel: HomeViewModel
-    
+
     companion object {
         const val CHANNEL_1_ID = "channel1"
         const val CHANNEL_2_ID = "channel2"

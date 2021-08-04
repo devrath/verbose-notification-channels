@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootId"
-    style="@style/launchBtnContainerScrollStyle">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/rootId">
 
-    <LinearLayout style="@style/launchBtnContainerStyle">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/edit_text_title"
             style="@style/launchEditTextStyle"
             android:hint="@string/enter_the_title"
             android:importantForAutofill="no" />
+
         <EditText
             android:id="@+id/edit_text_message"
             style="@style/launchEditTextStyle"
             android:importantForAutofill="no"
             android:hint="@string/enter_the_message" />
-        <Button
-            android:id="@+id/simpleNotificationId"
-            style="@style/launchBtnStyle"
-            android:text="Simple Notification" />
-        <Button
-            android:id="@+id/simpleCategoryNotificationId"
-            style="@style/launchBtnStyle"
-            android:text="Notification in category" />
 
     </LinearLayout>
 
-</ScrollView>
+    <ScrollView style="@style/launchBtnContainerScrollStyle">
+
+        <LinearLayout style="@style/launchBtnContainerStyle">
+
+            <Button
+                android:id="@+id/simpleNotificationId"
+                style="@style/launchBtnStyle"
+                android:text="Simple Notification" />
+            <Button
+                android:id="@+id/simpleCategoryNotificationId"
+                style="@style/launchBtnStyle"
+                android:text="Notification in category" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
