@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="enter_the_title">Enter the title</string>
+    <string name="enter_the_message">Enter the message</string>
+    <string name="send_notification_to_channel_1">Send notification to Channel 1</string>
+    <string name="send_notification_to_channel_2">Send notification to Channel 2</string>
 </resources>

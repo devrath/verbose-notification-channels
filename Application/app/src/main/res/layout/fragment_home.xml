@@ -5,10 +5,24 @@
 
     <LinearLayout style="@style/launchBtnContainerStyle">
 
+        <EditText
+            android:id="@+id/edit_text_title"
+            style="@style/launchEditTextStyle"
+            android:hint="@string/enter_the_title"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/edit_text_message"
+            style="@style/launchEditTextStyle"
+            android:importantForAutofill="no"
+            android:hint="@string/enter_the_message" />
         <Button
-            android:id="@+id/declareArraysId"
-            android:text="Action"
-            style="@style/launchBtnStyle"/>
+            android:id="@+id/sendOnChannelOneId"
+            style="@style/launchBtnStyle"
+            android:text="@string/send_notification_to_channel_1" />
+        <Button
+            android:id="@+id/sendOnChannelTwoId"
+            style="@style/launchBtnStyle"
+            android:text="@string/send_notification_to_channel_2" />
 
     </LinearLayout>
 

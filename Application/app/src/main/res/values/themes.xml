@@ -29,10 +29,17 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="launchBtnContainerStyle" >
+    <style name="launchEditTextStyle" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="launchBtnContainerStyle" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_margin">@dimen/container_margin</item>
+        <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
     </style>
 
