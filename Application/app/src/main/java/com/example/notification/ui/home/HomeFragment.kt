@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModelProvider
@@ -29,18 +30,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         const val CHANNEL_3_ID = "channel3"
         const val CHANNEL_4_ID = "channel4"
         const val CHANNEL_5_ID = "channel5"
+        const val CHANNEL_6_ID = "channel6"
 
         const val CHANNEL_1_NAME = "Channel 1"
         const val CHANNEL_2_NAME = "Channel 2"
         const val CHANNEL_3_NAME = "Channel 3"
         const val CHANNEL_4_NAME = "Channel 4"
         const val CHANNEL_5_NAME = "Channel 5"
+        const val CHANNEL_6_NAME = "Channel 6"
 
         const val CHANNEL_1_DESCRIPTION = "This is Channel 1"
         const val CHANNEL_2_DESCRIPTION = "This is Channel 2"
         const val CHANNEL_3_DESCRIPTION = "This is Channel 3"
         const val CHANNEL_4_DESCRIPTION = "This is Channel 4"
         const val CHANNEL_5_DESCRIPTION = "This is Channel 5"
+        const val CHANNEL_6_DESCRIPTION = "This is Channel 6"
     }
 
 
@@ -52,6 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.addingActionId.setOnClickListener(this@HomeFragment)
         binding.bigMsgId.setOnClickListener(this@HomeFragment)
         binding.imageInNotificationId.setOnClickListener(this@HomeFragment)
+        binding.progressNotificationId.setOnClickListener(this@HomeFragment)
         createNotificationChannels()
     }
 
@@ -83,6 +88,67 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 val message = binding.editTextMessage.text.toString()
                 imageInNotification(title, message)
             }
+            R.id.progressNotificationId -> {
+                val title = binding.editTextTitle.text.toString()
+                val message = binding.editTextMessage.text.toString()
+                progressInNotification(title, message)
+            }
+        }
+    }
+
+    private fun progressInNotification(title: String, message: String) {
+        activity?.let {
+
+            /*
+             * Broadcast Receiver:  As a intent in action click
+             * **** This is the intent triggered when we initiate a action */
+            val broadcastIntent = Intent(it, NotificationReceiver::class.java)
+            broadcastIntent.putExtra("toastMessage", message)
+            /*
+             * DESCRIPTION: Pending Intent is just a wrapper around the Intent used to have a action to be initiated in future
+             * PARAMETERS:
+             * *********** Context: From the launching screen
+             * *********** RequestCode: Used as a reference so pending intent can be cancelled in future
+             * *********** Intent: Used to launch the destination
+             * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
+             * */
+            val actionIntent = PendingIntent.getBroadcast(it, 0, broadcastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            val progressMax = 100
+            val notification: NotificationCompat.Builder =
+                NotificationCompat.Builder(it, CHANNEL_6_ID)
+                    .setSmallIcon(R.drawable.ic_pokemon)
+                    .setContentTitle("Download")
+                    .setContentText("Download in progress")
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setOngoing(true)
+                    .setOnlyAlertOnce(true)
+                    // Add the action click behavior
+                    .addAction(R.drawable.ic_action, "Toast", actionIntent)
+                    .setProgress(progressMax, 0, true)
+
+            getNotificationManager(activity)?.apply { notify(2, notification.build()) }
+
+            Thread {
+                SystemClock.sleep(2000)
+                var progress = 0
+                while (progress <= progressMax) {
+
+                    /*notification.setProgress(progressMax, progress, false);
+                            notificationManager.notify(2, notification.build());*/SystemClock.sleep(
+                        1000
+                    )
+                    progress += 20
+                }
+                notification.setContentText("Download finished")
+                    .setProgress(0, 0, false)
+                    .setOngoing(false)
+
+                getNotificationManager(activity)?.apply { notify(2, notification.build()) }
+
+            }.start()
         }
     }
 
@@ -296,6 +362,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 description = CHANNEL_5_DESCRIPTION
             }
 
+            val channel6 = NotificationChannel(
+                CHANNEL_6_ID, CHANNEL_6_NAME,
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                // Set properties that applies to all the notifications in this channel
+                description = CHANNEL_6_DESCRIPTION
+            }
+
             getNotificationManager(activity)?.apply {
                 // Use the notification manager to create the channel with attributes
                 channel1.apply { createNotificationChannel(this) }
@@ -303,6 +377,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 channel3.apply { createNotificationChannel(this) }
                 channel4.apply { createNotificationChannel(this) }
                 channel5.apply { createNotificationChannel(this) }
+                channel6.apply { createNotificationChannel(this) }
             }
 
         }

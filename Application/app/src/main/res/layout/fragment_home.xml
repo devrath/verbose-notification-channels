@@ -50,6 +50,10 @@
                 android:id="@+id/imageInNotificationId"
                 style="@style/launchBtnStyle"
                 android:text="Image in notification" />
+            <Button
+                android:id="@+id/progressNotificationId"
+                style="@style/launchBtnStyle"
+                android:text="Progress in notification" />
 
         </LinearLayout>
 
