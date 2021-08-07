@@ -4,10 +4,10 @@ Demo on how to use notifications on android
 
 | **`Content`** |
 | ------- |
-| [**`Notifications before Oreo`**]() |
-| [**`Notification channel on Oreo and Higher`**]() |
-| [**`What happens what the code of Notification channels are invoked prior to Oreo devices`**]() |
-| [**`How notifications work`**]() |
+| [**`Notifications before Oreo`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#notifications-before-oreo) |
+| [**`Notification channel on Oreo and Higher`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#notification-channel-on-oreo-and-higher) |
+| [**`What happens what the code of Notification channels are invoked prior to Oreo devices`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#what-happens-what-the-code-of-notification-channels-are-invoked-prior-to-oreo-devices) |
+| [**`How notifications work`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#how-notifications-work) |
 
 
 #### `Notifications before Oreo`
@@ -25,5 +25,8 @@ Demo on how to use notifications on android
 #### `How notifications work`
 ![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notificationflow.png)
 
+-----
 
-
+<p align="center">
+<a><img src="https://forthebadge.com/images/badges/built-for-android.svg"></a>
+</p>
