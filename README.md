@@ -1,12 +1,14 @@
 # verbose-notification-channels
 Demo on how to use notification channels on android 
+
+![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notification_channel.jpeg)
+
 <p align="center">
 <a><img src="https://img.shields.io/badge/Built%20Using-Kotlin-silver?style=for-the-badge&logo=kotlin"></a>
 <a><img src="https://img.shields.io/badge/Built%20By-Android%20Studio-red?style=for-the-badge&logo=android%20studio"></a>  
 <a><img src="https://img.shields.io/badge/API-Notification%20Channels-teal?style=for-the-badge&logo=tools"></a>  
 </p>
 
-![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notification_channel.jpeg)
 
 | **`Content`** |
 | ------- |
