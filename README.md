@@ -23,7 +23,11 @@ Demo on how to use notifications on android
 * There will not appear any crash as such.
 
 #### `How notifications work`
-![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notificationflow.png)
+![blockdiagram](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notificationflow.png)
+
+#### `Output of demo`
+![output](https://github.com/devrath/verbose-notification-channels/blob/main/assets/output.jpg)
+
 
 -----
 
