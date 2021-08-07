@@ -8,6 +8,7 @@ Demo on how to use notifications on android
 | [**`Notification channel on Oreo and Higher`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#notification-channel-on-oreo-and-higher) |
 | [**`What happens what the code of Notification channels are invoked prior to Oreo devices`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#what-happens-what-the-code-of-notification-channels-are-invoked-prior-to-oreo-devices) |
 | [**`How notifications work`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#how-notifications-work) |
+| [**`Output of the demo`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#output-of-demo) |
 
 
 #### `Notifications before Oreo`
