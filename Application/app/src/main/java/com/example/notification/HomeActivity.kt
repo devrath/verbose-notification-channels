@@ -1,16 +1,21 @@
 package com.example.notification
 
+
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.app.RemoteInput
+import androidx.core.content.ContextCompat
 import com.example.notification.databinding.ActivityHomeBinding
 import kotlin.random.Random
 
@@ -23,6 +28,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         const val CHANNEL_4_ID = "channel4"
         const val CHANNEL_5_ID = "channel5"
         const val CHANNEL_6_ID = "channel6"
+        const val CHANNEL_7_ID = "channel7"
 
         const val CHANNEL_1_NAME = "Channel 1"
         const val CHANNEL_2_NAME = "Channel 2"
@@ -30,6 +36,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         const val CHANNEL_4_NAME = "Channel 4"
         const val CHANNEL_5_NAME = "Channel 5"
         const val CHANNEL_6_NAME = "Channel 6"
+        const val CHANNEL_7_NAME = "Channel 7"
 
         const val CHANNEL_1_DESCRIPTION = "This is Channel 1"
         const val CHANNEL_2_DESCRIPTION = "This is Channel 2"
@@ -37,6 +44,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         const val CHANNEL_4_DESCRIPTION = "This is Channel 4"
         const val CHANNEL_5_DESCRIPTION = "This is Channel 5"
         const val CHANNEL_6_DESCRIPTION = "This is Channel 6"
+        const val CHANNEL_7_DESCRIPTION = "This is Channel 7"
     }
 
     val title = "This is the title "
@@ -50,9 +58,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         binding.bigMsgId.setOnClickListener(this@HomeActivity)
         binding.imageInNotificationId.setOnClickListener(this@HomeActivity)
         binding.progressNotificationId.setOnClickListener(this@HomeActivity)
+        binding.addReplyActionId.setOnClickListener(this@HomeActivity)
         createNotificationChannels()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.simpleNotificationId -> {
@@ -72,6 +82,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             }
             R.id.progressNotificationId -> {
                 progressInNotification(title, message)
+            }
+            R.id.addReplyActionId -> {
+                replyActionInNotification(title, message)
             }
         }
     }
@@ -287,6 +300,31 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun replyActionInNotification(title: String, message: String) {
+        val replyLabel = getString(R.string.str_enter_your_reply_here)
+        val remoteInput: android.app.RemoteInput = android.app.RemoteInput.Builder("KEY_TEXT_REPLY").setLabel(replyLabel).build()
+        val resultIntent = Intent(this, ActionActivity::class.java)
+        val resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val icon: Icon = Icon.createWithResource(this@HomeActivity, android.R.drawable.ic_dialog_info)
+
+        val replyAction: Notification.Action = Notification.Action.Builder(icon, getString(R.string.str_reply), resultPendingIntent)
+            .addRemoteInput(remoteInput)
+            .build()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notification = Notification.Builder(this, CHANNEL_7_ID)
+                .setColor(ContextCompat.getColor(this, android.R.color.holo_blue_light))
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(title)
+                .setContentText(message)
+                .addAction(replyAction).build()
+
+            // Notify the prepared notification to the manager
+            NotificationManager.getNotificationManager(this)?.apply { notify(Random.nextInt(), notification) }
+        }
+    }
+
 
     /**
      * Create the notification channels
@@ -343,6 +381,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 description = CHANNEL_6_DESCRIPTION
             }
 
+            val channel7 = NotificationChannel(
+                CHANNEL_7_ID, CHANNEL_6_NAME,
+                android.app.NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                // Set properties that applies to all the notifications in this channel
+                description = CHANNEL_6_DESCRIPTION
+            }
+
             NotificationManager.getNotificationManager(this)?.apply {
                 // Use the notification manager to create the channel with attributes
                 channel1.apply { createNotificationChannel(this) }
@@ -351,6 +397,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 channel4.apply { createNotificationChannel(this) }
                 channel5.apply { createNotificationChannel(this) }
                 channel6.apply { createNotificationChannel(this) }
+                channel7.apply { createNotificationChannel(this) }
             }
 
         }

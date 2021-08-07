@@ -28,6 +28,10 @@
             android:id="@+id/progressNotificationId"
             style="@style/launchBtnStyle"
             android:text="@string/progress_in_notification" />
+        <Button
+            android:id="@+id/addReplyActionId"
+            style="@style/launchBtnStyle"
+            android:text="@string/adding_reply_action" />
 
     </LinearLayout>
 

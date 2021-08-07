@@ -22,5 +22,7 @@
     <string name="big_message">Big Message</string>
     <string name="image_in_notification">Image in notification</string>
     <string name="progress_in_notification">Progress in notification</string>
-
+    <string name="adding_reply_action">Adding reply action</string>
+    <string name="str_enter_your_reply_here">Enter your reply here</string>
+    <string name="str_reply">Reply</string>
 </resources>
