@@ -39,6 +39,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         const val CHANNEL_6_DESCRIPTION = "This is Channel 6"
     }
 
+    val title = "This is the title "
+    val message = "This is the message"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.simpleNotificationId.setOnClickListener(this@HomeActivity)
@@ -53,88 +56,68 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.simpleNotificationId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
-
                 simpleNotification(title, message)
             }
             R.id.simpleCategoryNotificationId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
                 notificationInCategory(title, message)
             }
             R.id.addingActionId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
                 addingActionForNotification(title, message)
             }
             R.id.bigMsgId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
                 bigMessageNotification(title, message)
             }
             R.id.imageInNotificationId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
                 imageInNotification(title, message)
             }
             R.id.progressNotificationId -> {
-                val title = binding.editTextTitle.text.toString()
-                val message = binding.editTextMessage.text.toString()
                 progressInNotification(title, message)
             }
         }
     }
 
     private fun progressInNotification(title: String, message: String) {
-        this?.let {
+        this.let {
 
             /*
-             * Broadcast Receiver:  As a intent in action click
-             * **** This is the intent triggered when we initiate a action */
+                 * Broadcast Receiver:  As a intent in action click
+                 * **** This is the intent triggered when we initiate a action */
             val broadcastIntent = Intent(it, NotificationReceiver::class.java)
             broadcastIntent.putExtra("toastMessage", message)
             /*
-             * DESCRIPTION: Pending Intent is just a wrapper around the Intent used to have a action to be initiated in future
-             * PARAMETERS:
-             * *********** Context: From the launching screen
-             * *********** RequestCode: Used as a reference so pending intent can be cancelled in future
-             * *********** Intent: Used to launch the destination
-             * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
-             * */
-            val actionIntent = PendingIntent.getBroadcast(it, 0, broadcastIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-            )
+                 * DESCRIPTION: Pending Intent is just a wrapper around the Intent used to have a action to be initiated in future
+                 * PARAMETERS:
+                 * *********** Context: From the launching screen
+                 * *********** RequestCode: Used as a reference so pending intent can be cancelled in future
+                 * *********** Intent: Used to launch the destination
+                 * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
+                 * */
+            val actionIntent = PendingIntent.getBroadcast(it, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val progressMax = 100
             val notification: NotificationCompat.Builder =
-                    NotificationCompat.Builder(it, CHANNEL_6_ID)
-                            .setSmallIcon(R.drawable.ic_pokemon)
-                            .setContentTitle("Download")
-                            .setContentText("Download in progress")
-                            .setPriority(NotificationCompat.PRIORITY_LOW)
-                            .setOngoing(true)
-                            .setOnlyAlertOnce(true)
-                            // Add the action click behavior
-                            .addAction(R.drawable.ic_action, "Toast", actionIntent)
-                            .setProgress(progressMax, 0, true)
+                NotificationCompat.Builder(it, CHANNEL_6_ID)
+                    .setSmallIcon(R.drawable.ic_pokemon)
+                    .setContentTitle("Download")
+                    .setContentText("Download in progress")
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setOngoing(true)
+                    .setOnlyAlertOnce(true)
+                    // Add the action click behavior
+                    .addAction(R.drawable.ic_action, "Toast", actionIntent)
+                    .setProgress(progressMax, 0, true)
 
             NotificationManager.getNotificationManager(this)?.apply { notify(2, notification.build()) }
 
             Thread {
                 SystemClock.sleep(2000)
                 var progress = 0
-                while (progress <= progressMax) {
-
-                    /*notification.setProgress(progressMax, progress, false);
-                            notificationManager.notify(2, notification.build());*/SystemClock.sleep(
-                            1000
-                    )
+                while (progress <= progressMax) { SystemClock.sleep(1000)
                     progress += 20
                 }
                 notification.setContentText("Download finished")
-                        .setProgress(0, 0, false)
-                        .setOngoing(false)
+                    .setProgress(0, 0, false)
+                    .setOngoing(false)
 
                 NotificationManager.getNotificationManager(this)?.apply { notify(2, notification.build()) }
 
@@ -146,30 +129,30 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
      * Prepare the notification which has a large text
      */
     private fun bigMessageNotification(title: String, message: String) {
-        this?.let {
+        this.let {
             val activityIntent = Intent(it, HomeActivity::class.java)
             val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
 
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_4_ID)
-                    .setSmallIcon(R.drawable.ic_pokemon)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    // Set the type specifying the big text message
-                    .setStyle(
-                            NotificationCompat.BigTextStyle()
-                                    // Entire big text
-                                    .bigText(getString(R.string.long_text_message))
-                                    // Header title for the big text
-                                    .setBigContentTitle("Large text title")
-                                    // Summary title text in the collapsed state
-                                    .setSummaryText("Large text summary")
-                    )
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .setColor(Color.BLUE)
-                    .setContentIntent(contentIntent)
-                    .setAutoCancel(true)
-                    .build()
+                .setSmallIcon(R.drawable.ic_pokemon)
+                .setContentTitle(title)
+                .setContentText(message)
+                // Set the type specifying the big text message
+                .setStyle(
+                    NotificationCompat.BigTextStyle()
+                        // Entire big text
+                        .bigText(getString(R.string.long_text_message))
+                        // Header title for the big text
+                        .setBigContentTitle("Large text title")
+                        // Summary title text in the collapsed state
+                        .setSummaryText("Large text summary")
+                )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .build()
 
             // Notify the prepared notification to the manager
             NotificationManager.getNotificationManager(this)?.apply { notify(Random.nextInt(), notification) }
@@ -182,23 +165,23 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
      * Prepare the notification which has a Image
      */
     private fun imageInNotification(title: String, message: String) {
-        this?.let {
+        this.let {
             val activityIntent = Intent(it, HomeActivity::class.java)
             val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
 
             val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_profile)
 
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_5_ID)
-                    .setSmallIcon(R.drawable.ic_pokemon)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setLargeIcon(largeIcon)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .setColor(Color.BLUE)
-                    .setContentIntent(contentIntent)
-                    .setAutoCancel(true)
-                    .build()
+                .setSmallIcon(R.drawable.ic_pokemon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setLargeIcon(largeIcon)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .build()
 
             // Notify the prepared notification to the manager
             NotificationManager.getNotificationManager(this)?.apply { notify(Random.nextInt(), notification) }
@@ -209,14 +192,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
      * Prepare the notification and notify using the notification manager
      */
     private fun simpleNotification(title: String, message: String) {
-        this?.let {
+        this.let {
             // Prepare each notification
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_2_ID)
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setPriority(NotificationCompat.PRIORITY_LOW)
-                    .build()
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .build()
             // Notify the prepared notification to the manager
             NotificationManager.getNotificationManager(this)?.apply { notify(Random.nextInt(), notification) }
         }
@@ -227,15 +210,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
      * Prepare the notification
      */
     private fun notificationInCategory(title: String, message: String) {
-        this?.let {
+        this.let {
             // Prepare each notification
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_1_ID)
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_EMAIL)
-                    .build()
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_EMAIL)
+                .build()
             // Notify the prepared notification to the manager
             NotificationManager.getNotificationManager(this)?.apply { notify(Random.nextInt(), notification) }
         }

@@ -1,63 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/rootId">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/launchBtnContainerScrollStyle">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <LinearLayout style="@style/launchBtnContainerStyle">
 
-        <EditText
-            android:id="@+id/edit_text_title"
-            style="@style/launchEditTextStyle"
-            android:hint="@string/enter_the_title"
-            android:text="@string/enter_the_title"
-            android:importantForAutofill="no" />
-
-        <EditText
-            android:id="@+id/edit_text_message"
-            style="@style/launchEditTextStyle"
-            android:importantForAutofill="no"
-            android:hint="@string/enter_the_message"
-            android:text="@string/enter_the_message"/>
+        <Button
+            android:id="@+id/simpleNotificationId"
+            style="@style/launchBtnStyle"
+            android:text="@string/simple_notification" />
+        <Button
+            android:id="@+id/simpleCategoryNotificationId"
+            style="@style/launchBtnStyle"
+            android:text="@string/notification_in_category" />
+        <Button
+            android:id="@+id/addingActionId"
+            style="@style/launchBtnStyle"
+            android:text="@string/adding_action" />
+        <Button
+            android:id="@+id/bigMsgId"
+            style="@style/launchBtnStyle"
+            android:text="@string/big_message" />
+        <Button
+            android:id="@+id/imageInNotificationId"
+            style="@style/launchBtnStyle"
+            android:text="@string/image_in_notification" />
+        <Button
+            android:id="@+id/progressNotificationId"
+            style="@style/launchBtnStyle"
+            android:text="@string/progress_in_notification" />
 
     </LinearLayout>
 
-    <ScrollView style="@style/launchBtnContainerScrollStyle">
-
-        <LinearLayout style="@style/launchBtnContainerStyle">
-
-            <Button
-                android:id="@+id/simpleNotificationId"
-                style="@style/launchBtnStyle"
-                android:text="Simple Notification" />
-            <Button
-                android:id="@+id/simpleCategoryNotificationId"
-                style="@style/launchBtnStyle"
-                android:text="Notification in category" />
-            <Button
-                android:id="@+id/addingActionId"
-                style="@style/launchBtnStyle"
-                android:text="Adding action" />
-            <Button
-                android:id="@+id/bigMsgId"
-                style="@style/launchBtnStyle"
-                android:text="Big Message" />
-            <Button
-                android:id="@+id/imageInNotificationId"
-                style="@style/launchBtnStyle"
-                android:text="Image in notification" />
-            <Button
-                android:id="@+id/progressNotificationId"
-                style="@style/launchBtnStyle"
-                android:text="Progress in notification" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>
 
