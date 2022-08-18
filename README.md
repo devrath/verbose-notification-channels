@@ -1,7 +1,7 @@
 <img src="https://github.com/devrath/devrath/blob/master/images/kotlin_logo.png" align="right" title="Kotlin Logo" width="120">
 
 # verbose-notification-channels 🧞‍
-<p align="center">
+<p align="left">
 <a><img src="https://img.shields.io/badge/Built%20Using-Kotlin-silver?style=for-the-badge&logo=kotlin"></a>
 <a><img src="https://img.shields.io/badge/Built%20By-Android%20Studio-red?style=for-the-badge&logo=android%20studio"></a>  
 <a><img src="https://img.shields.io/badge/API-Notification%20Channels-teal?style=for-the-badge&logo=tools"></a>  
