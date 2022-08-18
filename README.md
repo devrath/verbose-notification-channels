@@ -1,13 +1,21 @@
-# verbose-notification-channels
-Demo on how to use notification channels on android 
+<img src="https://github.com/devrath/devrath/blob/master/images/kotlin_logo.png" align="right" title="Kotlin Logo" width="120">
 
-![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notification_channel.jpeg)
-
+# verbose-notification-channels 🧞‍
 <p align="center">
 <a><img src="https://img.shields.io/badge/Built%20Using-Kotlin-silver?style=for-the-badge&logo=kotlin"></a>
 <a><img src="https://img.shields.io/badge/Built%20By-Android%20Studio-red?style=for-the-badge&logo=android%20studio"></a>  
 <a><img src="https://img.shields.io/badge/API-Notification%20Channels-teal?style=for-the-badge&logo=tools"></a>  
 </p>
+
+## **`𝙸𝚗𝚝𝚛𝚘𝚍𝚞𝚌𝚝𝚒𝚘𝚗`** 💡
+:label: This repository contains demonstrations on how to use notifications in android. </br>
+:label: Notifications are used to display a `message` outside the `UI` of the application. Each notification contains an option to add a action for it, which can be used to navigate into the application. </br>
+
+
+
+![Banner](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notification_channel.jpeg)
+
+
 
 
 | **`Content`** |
