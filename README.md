@@ -25,6 +25,8 @@
 | [**`𝚆𝚑𝚊𝚝 𝚑𝚊𝚙𝚙𝚎𝚗𝚜 𝚠𝚑𝚎𝚗 𝚝𝚑𝚎 𝚌𝚘𝚍𝚎 𝚘𝚏 𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚌𝚑𝚊𝚗𝚗𝚎𝚕𝚜 𝚒𝚜 𝚒𝚗𝚟𝚘𝚔𝚎𝚍 𝚙𝚛𝚒𝚘𝚛 𝚝𝚘 𝙾𝚛𝚎𝚘 𝚍𝚎𝚟𝚒𝚌𝚎𝚜`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#what-happens-what-the-code-of-notification-channels-are-invoked-prior-to-oreo-devices) |
 | [**`𝙷𝚘𝚠 𝚗𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗𝚜 𝚠𝚘𝚛𝚔`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#how-notifications-work) |
 | [**`𝙾𝚞𝚝𝚙𝚞𝚝 𝚘𝚏 𝚝𝚑𝚎 𝚍𝚎𝚖𝚘`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#output-of-demo) |
+| [**`𝚂𝚞𝚙𝚙𝚘𝚛𝚝 𝚏𝚘𝚛 𝚊𝚗𝚍𝚛𝚘𝚒𝚍-𝟷𝟹`**](https://github.com/devrath/verbose-notification-channels/blob/main/README.md#how-notifications-work) |
+
 
 
 #### `Notifications before Oreo`
@@ -44,6 +46,10 @@
 
 #### `Output of demo`
 ![output](https://github.com/devrath/verbose-notification-channels/blob/main/assets/output.jpg)
+
+-----
+
+#### `Support for android-13`
 
 
 -----
