@@ -4,6 +4,7 @@ package com.example.notification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -105,7 +106,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                  * *********** Intent: Used to launch the destination
                  * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
                  * */
-            val actionIntent = PendingIntent.getBroadcast(it, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val actionIntent =  setMutableFlag(context = it,intent = broadcastIntent, isBroadcast = true)
 
             val progressMax = 100
             val notification: NotificationCompat.Builder =
@@ -144,7 +145,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun bigMessageNotification(title: String, message: String) {
         this.let {
             val activityIntent = Intent(it, HomeActivity::class.java)
-            val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
+            val contentIntent =  setMutableFlag(context = it,intent = activityIntent, isBroadcast = false)
 
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_4_ID)
                 .setSmallIcon(R.drawable.ic_pokemon)
@@ -180,7 +181,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun imageInNotification(title: String, message: String) {
         this.let {
             val activityIntent = Intent(it, HomeActivity::class.java)
-            val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
+            val contentIntent =  setMutableFlag(context = it,intent = activityIntent, isBroadcast = false)
 
             val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_profile)
 
@@ -256,7 +257,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                  * *********** Intent: Used to launch the destination
                  * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
                  * */
-            val contentIntent = PendingIntent.getActivity(it, 0, activityIntent, 0)
+            val contentIntent =  setMutableFlag(context = it,intent = activityIntent, isBroadcast = false)
 
             /*
                  * Broadcast Receiver:  As a intent in action click
@@ -271,12 +272,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                  * *********** Intent: Used to launch the destination
                  * *********** Flag: This is used to define what happens when our Intent is recreated, since the intent remains same, we can add zero
                  * */
-            val actionIntent = PendingIntent.getBroadcast(
-                    it,
-                    0,
-                    broadcastIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-            )
+            val actionIntent =  setMutableFlag(context = it,intent = broadcastIntent, isBroadcast = true)
 
             val notification: Notification = NotificationCompat.Builder(it, CHANNEL_3_ID)
                     .setSmallIcon(R.drawable.ic_pokemon)
@@ -306,6 +302,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         val remoteInput: android.app.RemoteInput = android.app.RemoteInput.Builder("KEY_TEXT_REPLY").setLabel(replyLabel).build()
         val resultIntent = Intent(this, ActionActivity::class.java)
         val resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
         val icon: Icon = Icon.createWithResource(this@HomeActivity, android.R.drawable.ic_dialog_info)
 
         val replyAction: Notification.Action = Notification.Action.Builder(icon, getString(R.string.str_reply), resultPendingIntent)
@@ -400,6 +397,26 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 channel7.apply { createNotificationChannel(this) }
             }
 
+        }
+    }
+
+    private fun setMutableFlag(context: Context, intent: Intent, isBroadcast:Boolean=false): PendingIntent? {
+
+        val immutableFlag = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        val updateFlag = PendingIntent.FLAG_UPDATE_CURRENT
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(isBroadcast){
+                PendingIntent.getBroadcast(context, 0, intent, immutableFlag)
+            }else{
+                PendingIntent.getActivity(context, 0, intent, immutableFlag)
+            }
+        } else {
+            if(isBroadcast){
+                PendingIntent.getBroadcast(context, 0, intent, updateFlag)
+            }else{
+                PendingIntent.getActivity(context, 0, intent, updateFlag)
+            }
         }
     }
 
