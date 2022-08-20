@@ -301,11 +301,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         val replyLabel = getString(R.string.str_enter_your_reply_here)
         val remoteInput: android.app.RemoteInput = android.app.RemoteInput.Builder("KEY_TEXT_REPLY").setLabel(replyLabel).build()
         val resultIntent = Intent(this, ActionActivity::class.java)
-        val resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent =  setMutableFlag(context = this,intent = resultIntent, isBroadcast = false)
 
         val icon: Icon = Icon.createWithResource(this@HomeActivity, android.R.drawable.ic_dialog_info)
 
-        val replyAction: Notification.Action = Notification.Action.Builder(icon, getString(R.string.str_reply), resultPendingIntent)
+        val resultPendingIntentAction = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val replyAction: Notification.Action = Notification.Action.Builder(icon, getString(R.string.str_reply), resultPendingIntentAction)
             .addRemoteInput(remoteInput)
             .build()
 
@@ -402,16 +404,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     private fun setMutableFlag(context: Context, intent: Intent, isBroadcast:Boolean=false): PendingIntent? {
 
-        val immutableFlag = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        val updateFlag = PendingIntent.FLAG_UPDATE_CURRENT
-
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val immutableFlag = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             if(isBroadcast){
                 PendingIntent.getBroadcast(context, 0, intent, immutableFlag)
             }else{
                 PendingIntent.getActivity(context, 0, intent, immutableFlag)
             }
         } else {
+            val updateFlag = PendingIntent.FLAG_UPDATE_CURRENT
             if(isBroadcast){
                 PendingIntent.getBroadcast(context, 0, intent, updateFlag)
             }else{
