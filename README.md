@@ -46,15 +46,15 @@
 
 #### `Output of demo`
 
-`Simple notification` | `Notification with big message` | `Adding action`
+`𝚂𝚒𝚖𝚙𝚕𝚎 𝚗𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗` | `𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚠𝚒𝚝𝚑 𝚊 𝚋𝚒𝚐 𝚖𝚎𝚜𝚜𝚊𝚐𝚎` | `𝙰𝚍𝚍𝚒𝚗𝚐 𝚊𝚌𝚝𝚒𝚘𝚗`
 --- | --- | --- |
 <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/simple_notification.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/big_message.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/add_action.gif" width="220" height="460"/>|
 
-`Notification with grouping` | `Notification with image` | `Notification with progress` 
+`𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚠𝚒𝚝𝚑 𝚐𝚛𝚘𝚞𝚙𝚒𝚗𝚐` | `𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚠𝚒𝚝𝚑 𝚒𝚖𝚊𝚐𝚎` | `𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚠𝚒𝚝𝚑 𝚙𝚛𝚘𝚐𝚛𝚎𝚜𝚜` 
 --- | --- | --- |
 <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/category.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/img.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/progress.gif" width="220" height="460"/>|
 
-`Notification with chat action` |
+`𝙽𝚘𝚝𝚒𝚏𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚠𝚒𝚝𝚑 𝚌𝚑𝚊𝚝 𝚊𝚌𝚝𝚒𝚘𝚗` |
 --- |
 <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/reply_action_chat.gif" width="220" height="460"/>|
 
@@ -62,7 +62,9 @@
 -----
 
 #### `Support for android-13`
-<--------- In Progress --------->
+
+#### `𝙱𝚊𝚌𝚔𝚐𝚛𝚘𝚞𝚗𝚍`
+
 
 -----
 
