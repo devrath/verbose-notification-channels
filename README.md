@@ -69,12 +69,11 @@
 
 #### `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗𝚜`
 
-* When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone`.
-  * When you run this on `android-Pie` which is `API-28` device, no notification permission is displayed.
-* When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone`.
-  * When you run this on `android-13` which is `API-33` device, even though we have not asked the app to display runtime permission, android device forcefully displays it if the code executes any lines that involve creation of channels.
-  * If the user approves it, application can post the notification. 
-  * If the user denies it, this is dangerous since not only user will not be able to post notification also this dialog will never again unless you reinstall the app.
+| `𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗` | `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗` | `𝙾𝚞𝚝𝚙𝚞𝚝` |
+| ---------- | ------------ | -------- |
+| When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone` |  🏷️ When you run this on `android-Pie` which is `API-28` device, no notification permission is displayed. |  |
+| When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone` |  🏷️ When you run this on `android-13` which is `API-33` device, even though we have not asked the app to display runtime permission, android device forcefully displays it if the code executes any lines that involve creation of channels. </br> 🏷️ If the user approves it, application can post the notification. </br> 🏷️ If the user denies it, this is dangerous since not only user will not be able to post notification also this dialog will never again unless you reinstall the app.  | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/without_manifest_permission.gif" width="220" height="460"/> |
+
 
 -----
 
