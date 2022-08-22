@@ -47,10 +47,17 @@
 #### `Output of demo`
 ![output](https://github.com/devrath/verbose-notification-channels/blob/main/assets/output.jpg)
 
-`Simple notification` | `Notification with big message` | `Adding action` | `Notification grouping` | `Notification with image` 
---- | --- | --- | --- | --- |
-<img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/simple_notification.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/big_message.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/add_action.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/category.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/img.gif" width="220" height="460"/>|
+`Simple notification` | `Notification with big message` | `Adding action`
+--- | --- | --- |
+<img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/simple_notification.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/big_message.gif" width="220" height="460"/> | <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/add_action.gif" width="220" height="460"/>|
 
+`Notification with grouping` | `Notification with image` | `Notification with progress` 
+--- | --- | --- |
+<img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/category.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/img.gif" width="220" height="460"/>| <img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/progress.gif" width="220" height="460"/>|
+
+`Notification with chat action` |
+--- |
+<img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/demo/reply_action_chat.gif" width="220" height="460"/>|
 
 
 -----
