@@ -42,7 +42,7 @@
 * There will not appear any crash as such.
 
 #### `How notifications work`
-![blockdiagram](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notificationflow.png)
+![blockdiagram](https://github.com/devrath/verbose-notification-channels/blob/main/assets/sematic.png)
 
 #### `Output of demo`
 
