@@ -64,9 +64,17 @@
 #### `Support for android-13`
 
 #### `𝙱𝚊𝚌𝚔𝚐𝚛𝚘𝚞𝚗𝚍`
-* There is a new change that android is bringing for `android-13` which is also called `Tiramisu` where there is a runtime permission, user has to approve before the notification has to be posted from a app in device.
-* This is different that the already existing permissions where user can turn on/off on per each notification channel.
+* There is a new change that android is bringing for `android-13` which is also called `Tiramisu` and `API-33` where there is a runtime permission, user has to approve before the notification has to be posted from a app in device.
+* This is different that the already existing permissions where user can turn `on`/`off` on per each notification channel.
 
+#### `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗𝚜`
+
+* When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone`.
+  * When you run this on `android-Pie` which is `API-28` device, no notification permission is displayed.
+* When the app is built with `compile-SDK` and `target-SDK` is `API-31` which is `android-12` also known as `snow-clone`.
+  * When you run this on `android-13` which is `API-33` device, even though we have not asked the app to display runtime permission, android device forcefully displays it if the code executes any lines that involve creation of channels.
+  * If the user approves it, application can post the notification. 
+  * If the user denies it, this is dangerous since not only user will not be able to post notification also this dialog will never again unless you reinstall the app.
 
 -----
 
