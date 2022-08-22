@@ -45,7 +45,6 @@
 ![blockdiagram](https://github.com/devrath/verbose-notification-channels/blob/main/assets/notificationflow.png)
 
 #### `Output of demo`
-![output](https://github.com/devrath/verbose-notification-channels/blob/main/assets/output.jpg)
 
 `Simple notification` | `Notification with big message` | `Adding action`
 --- | --- | --- |
