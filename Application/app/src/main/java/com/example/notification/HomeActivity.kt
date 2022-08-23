@@ -1,6 +1,7 @@
 package com.example.notification
 
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.PendingIntent
@@ -9,16 +10,22 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Icon
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.provider.Settings
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.app.RemoteInput
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.notification.databinding.ActivityHomeBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlin.random.Random
+
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate), View.OnClickListener  {
 
@@ -51,8 +58,49 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     val title = "This is the title "
     val message = "This is the message"
 
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setOnClickListeners()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Display runtime permission flow !!
+            val manager = NotificationManagerCompat.from(this)
+            if (manager.areNotificationsEnabled()){
+                // Notifications are enabled
+                createNotificationChannels()
+            } else {
+                // Notifications are not enabled - Show the runtime permission
+
+                // Below code sets up permissions request launcher.
+                requestPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted: Boolean ->
+                    if (isGranted) {
+                        // Permission is granted. Continue the action or workflow in your app
+                        createNotificationChannels()
+                    } else {
+                        // Explain to the user that the feature is unavailable because the
+                        // features requires a permission that the user has denied. At the
+                        // same time, respect the user's decision. Don't link to system
+                        // settings in an effort to convince the user to change their
+                        // decision.
+
+                        val snackbar = Snackbar
+                            .make(binding.root, "Notification Settings", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("YES") {
+                                showNotificationSettings(this)
+                            }
+                        snackbar.show()
+                    }
+                }
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            // No need of runtime permission flow - Just create channels
+            createNotificationChannels()
+        }
+    }
+
+    private fun setOnClickListeners() {
         binding.simpleNotificationId.setOnClickListener(this@HomeActivity)
         binding.simpleCategoryNotificationId.setOnClickListener(this@HomeActivity)
         binding.addingActionId.setOnClickListener(this@HomeActivity)
@@ -60,7 +108,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         binding.imageInNotificationId.setOnClickListener(this@HomeActivity)
         binding.progressNotificationId.setOnClickListener(this@HomeActivity)
         binding.addReplyActionId.setOnClickListener(this@HomeActivity)
-        createNotificationChannels()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -419,6 +466,42 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 PendingIntent.getActivity(context, 0, intent, updateFlag)
             }
         }
+    }
+
+
+
+    fun showNotificationSettings(context: Context, channelId: String? = null) {
+        // MORE-INFO: https://stackoverflow.com/a/69452006/1083093
+
+        val notificationSettingsIntent = when {
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O /*26*/ -> Intent().apply {
+                action = when (channelId) {
+                    null -> Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                    else -> Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
+                }
+                channelId?.let { putExtra(Settings.EXTRA_CHANNEL_ID, it) }
+                putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P /*28*/) {
+                    flags += Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            }
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP /*21*/ -> Intent().apply {
+                action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                putExtra("app_package", context.packageName)
+                putExtra("app_uid", context.applicationInfo.uid)
+            }
+
+            Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT /*19*/ -> Intent().apply {
+                action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                addCategory(Intent.CATEGORY_DEFAULT)
+                data = Uri.parse("package:${context.packageName}")
+            }
+
+            else -> null
+        }
+        notificationSettingsIntent?.let(context::startActivity)
     }
 
 }
