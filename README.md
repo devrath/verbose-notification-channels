@@ -68,6 +68,9 @@
 * This is different that the already existing permissions where user can turn `on`/`off` on per each notification channel.
 * Its protection level is marked dangerous :biohazard:
 
+#### `𝙼𝚒𝚐𝚛𝚊𝚝𝚒𝚘𝚗 𝚋𝚎𝚑𝚊𝚟𝚒𝚘𝚞𝚛 𝚏𝚛𝚘𝚖 𝚙𝚛𝚎 𝚊𝚗𝚍𝚛𝚘𝚒𝚍-𝟷𝟹 𝚝𝚘 𝟷𝟹 𝚊𝚗𝚍 𝚊𝚋𝚘𝚟𝚎` ----> [𝙶𝚘𝚘𝚐𝚕𝚎 𝚍𝚘𝚌 𝚛𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚎](https://developer.android.com/guide/topics/ui/notifiers/notification-permission#eligibility)
+#### `𝙱𝚎𝚜𝚝 𝚙𝚛𝚊𝚌𝚝𝚒𝚌𝚎 𝚘𝚗 𝚑𝚘𝚠 𝚝𝚘 𝚜𝚑𝚘𝚠 𝚝𝚑𝚎 𝚛𝚞𝚗𝚝𝚒𝚖𝚎 𝚙𝚎𝚛𝚖𝚒𝚜𝚜𝚒𝚘𝚗` ---> [𝙶𝚘𝚘𝚐𝚕𝚎 𝚍𝚘𝚌 𝚛𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚎](https://developer.android.com/guide/topics/ui/notifiers/notification-permission#best-practices)
+
 #### `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗𝚜`
 
 | `𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗` | `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗` | `𝙾𝚞𝚝𝚙𝚞𝚝` |
