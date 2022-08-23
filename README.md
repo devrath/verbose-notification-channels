@@ -60,6 +60,7 @@
 
 
 -----
+<img src="https://github.com/devrath/verbose-notification-channels/blob/main/assets/android-13.png" align="right" title="Kotlin Logo" width="120">
 
 #### `Support for android-13`
 
