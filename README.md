@@ -66,6 +66,7 @@
 #### `𝙱𝚊𝚌𝚔𝚐𝚛𝚘𝚞𝚗𝚍`
 * There is a new change that android is bringing for `android-13` which is also called `Tiramisu` and `API-33` where there is a runtime permission, user has to approve before the notification has to be posted from a app in device.
 * This is different that the already existing permissions where user can turn `on`/`off` on per each notification channel.
+* Its protection level is marked dangerous :biohazard:
 
 #### `𝙾𝚋𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗𝚜`
 
